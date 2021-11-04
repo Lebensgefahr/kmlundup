@@ -139,6 +139,15 @@ def findPlacemark(root):
 #             style = 'point'
               coordinates = roundCoordinates(obj.text)
               addTo(points)
+        elif item.tag == "MultiGeometry":
+          coordinates = ""
+          for obj in item:
+           if obj.tag == "LineString":
+             for line in obj:
+               if line.tag == "coordinates":
+#                style = 'way'
+                 coordinates = coordinates + line.text
+          addTo(tracks)
         elif item.tag == "LineString":
           for obj in item:
             if obj.tag == "coordinates":
