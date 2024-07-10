@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os, sys
 import re
@@ -171,8 +171,8 @@ def prettify(elem):
 
 if __name__ == "__main__":
   try:
-    reload(sys)
-    sys.setdefaultencoding('utf8')
+#    reload(sys)
+#    sys.setdefaultencoding('utf8')
     len(sys.argv) == 2
     option = sys.argv[1]
     filename = sys.argv[2]
@@ -190,15 +190,16 @@ if __name__ == "__main__":
       folder = addFolder('Points')
       document.append(folder)
       for key in points.keys():
+        print("Point: " + points[key]['name'], file=sys.stderr)
         folder.append(addPoint(points[key]['name'], points[key]['description'], key))
     # Print tracks only
     if sys.argv[1] == "--tracks":
       folder = addFolder('Tracks')
       document.append(folder)
       for key in tracks.keys():
+        print("Track: " + tracks[key]['name'], file=sys.stderr)
         folder.append(addTrack(tracks[key]['name'], tracks[key]['description'], key))
     print(prettify(kml))
-
   except:
-    print "Usage: " + os.path.basename(__file__) + "[ --points | --tracks] FILE"
+    print("Usage: " + os.path.basename(__file__) + "[ --points | --tracks] FILE")
     sys.exit(1)
